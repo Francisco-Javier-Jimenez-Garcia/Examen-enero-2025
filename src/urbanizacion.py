@@ -5,7 +5,7 @@ import csv
 Mejora = NamedTuple("Mejora",
         [("denominacion", str),
         ("coste", int),
-        ("fecha ", date)])
+        ("fecha", date)])
 
 
 Vivienda = NamedTuple("Vivienda",
@@ -48,14 +48,16 @@ def lee_viviendas(ruta: str) -> list[Vivienda]:
     with open(ruta, encoding="utf-8") as f:
         lector = csv.reader(f, delimiter=";")
         next(lector)
-        for propietario, calle, fecha_adquisicion, numero, metros, precio, mejoras in lector:
-            fecha_adquisicion = parsea_fecha(fecha_adquisicion)
+        for propietario, calle, numero, fecha_adquisicion, metros, precio, mejoras in lector:
             numero = int(numero)
+            fecha_adquisicion = parsea_fecha(fecha_adquisicion)
             metros = float(metros)
             precio = int(precio)
             mejoras = parsea_mejoras(mejoras)
             tupla = Vivienda(propietario, calle, fecha_adquisicion, numero, metros, precio, mejoras)
-            res.append(tupl
+            res.append(tupla)
+    return res
+
 
 
 
