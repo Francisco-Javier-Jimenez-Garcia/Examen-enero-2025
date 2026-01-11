@@ -25,6 +25,6 @@ def test_lee_viviendas(ruta: str)-> list[Vivienda]:
 
 if __name__ == "__main__":
     
-    ruta = "data\CSV de la sesión 2.csv"
+    ruta = "/root/data/CSV de la sesión 2.csv"
     test_lee_viviendas(ruta)
     
