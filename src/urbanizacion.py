@@ -59,6 +59,18 @@ def lee_viviendas(ruta: str) -> list[Vivienda]:
     return res
 
 
+#Ejercicio 2
+def total_mejoras_por_calle(viviendas: list[Vivienda], par_impar: str) -> dict[str,int]:
+    res = dict()
+    for e in viviendas:
+        if (e.numero % 2 == 0 and par_impar.lower() == "par") /
+        or (e.numero != 0 and par_impar.lower() == "impar"):
+            if e.calle not in res:    
+                res[e.calle] = 0
+            res[e.calle] += len(e.mejoras)
+    return res
+    
+
 
 
 
