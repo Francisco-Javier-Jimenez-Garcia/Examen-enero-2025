@@ -26,9 +26,15 @@ def test_vivienda_con_mejora_mas_rapida(viviendas: list[Vivienda]) -> None:
     res = vivienda_con_mejora_mas_rapida(viviendas)
     print(f"La vivienda que hizo una mejora en menos tiempo es: {res}")
     
+def test_calle_mayor_diferencia_precios(viviendas: list[Vivienda]):
+    res = calle_mayor_diferencia_precios(viviendas)
+    print(f"La calle con mayor diferencia de precios es {res}")
 
-
-
+def test_n_viviendas_top_valoradas_por_calle(viviendas: list[Vivienda], fecha: date|None = None, n: int = 3) -> None:
+    res = n_viviendas_top_valoradas_por_calle(viviendas, fecha, n)
+    print(f"Para n={4} y fecha {fecha} son:")
+    for calle, lista_viviendas in res.items():
+        print(f"{calle} --> {lista_viviendas}")
 
 
 
@@ -44,5 +50,12 @@ if __name__ == "__main__":
     #test_total_mejoras_por_calle(viviendas, "impar")
     
     #test_vivienda_con_mejora_mas_rapida(viviendas)
+    
+    #test_calle_mayor_diferencia_precios(viviendas)
+    
+    #test_n_viviendas_top_valoradas_por_calle(viviendas, date(2020,1 ,1), 4)
+    #test_n_viviendas_top_valoradas_por_calle(viviendas)  #CON PARAMETROS POR DEFECTO
+    
+    
     
     

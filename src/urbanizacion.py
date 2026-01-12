@@ -1,6 +1,7 @@
 from typing import NamedTuple
 from datetime import datetime,date
 import csv
+from collections import defaultdict
 
 Mejora = NamedTuple("Mejora",
         [("denominacion", str),
@@ -87,7 +88,35 @@ def vivienda_con_mejora_mas_rapida(viviendas: list[Vivienda]) -> tuple[str,str,i
     return (v_ganadora.propietario, v_ganadora.calle, v_ganadora.numero, dias_ganador, m_ganadora.denominacion)
         
         
+#Ejercicio 4
+
+def calle_mayor_diferencia_precios(viviendas: list[Vivienda]) -> str:
+    diferencias = defaultdict(int)
     
+    for e in viviendas:
+        if e.numero % 2 != 0:   #Es impar
+            diferencias[e.calle] += e.precio
+        else:
+            diferencias[e.calle] -= e.precio
+    
+    return max(diferencias, key= lambda calle: abs(diferencias[calle]))    
+
+
+#Ejercicio 5
+
+def calculo_valor_vivienda(viviendas):
+    valor_mejoras = sum(e.coste for e in viviendas.mejoras)
+    return viviendas.precio + valor_mejoras
+
+def n_viviendas_top_valoradas_por_calle(viviendas: list[Vivienda], fecha: date|None = None, n: int = 3) -> dict[str,list]:
+    calles = defaultdict(list)
+    for e in viviendas:
+        if fecha == None or e.fecha_adquisicion >= fecha:
+            valor_total = calculo_valor_vivienda(e)
+            calles[e.calle].append((e.propietario, e.numero, valor_total))
+    return {c: sorted(e, key= lambda x: x[2], reverse= True)[:n] for c, e in calles.items()}
+    
+
 
 
 
