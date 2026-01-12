@@ -63,16 +63,31 @@ def lee_viviendas(ruta: str) -> list[Vivienda]:
 def total_mejoras_por_calle(viviendas: list[Vivienda], par_impar: str) -> dict[str,int]:
     res = dict()
     for e in viviendas:
-        if (e.numero % 2 == 0 and par_impar.lower() == "par") /
-        or (e.numero != 0 and par_impar.lower() == "impar"):
+        if (e.numero % 2 == 0 and par_impar.lower() == "par") or (e.numero % 2 != 0 and par_impar.lower() == "impar"):
             if e.calle not in res:    
                 res[e.calle] = 0
             res[e.calle] += len(e.mejoras)
     return res
+
+#Ejercicio 3
+
+def tiempo_hasta_mejora(fecha_adquisicion, fecha_mejora):
+    tiempo = (fecha_mejora - fecha_adquisicion).days
+    return tiempo
+
+def vivienda_con_mejora_mas_rapida(viviendas: list[Vivienda]) -> tuple[str,str,int,int,str]:
+    candidatos = []
+    for e in viviendas:
+        for m in e.mejoras:
+            dias = tiempo_hasta_mejora(e.fecha_adquisicion, m.fecha)
+            candidatos.append((e, dias, m))
+    minimo = min(candidatos, key= lambda x: x[1])
+    v_ganadora, dias_ganador, m_ganadora = minimo
     
-
-
-
+    return (v_ganadora.propietario, v_ganadora.calle, v_ganadora.numero, dias_ganador, m_ganadora.denominacion)
+        
+        
+    
 
 
 
