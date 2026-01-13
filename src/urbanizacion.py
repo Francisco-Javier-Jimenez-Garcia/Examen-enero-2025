@@ -117,7 +117,45 @@ def n_viviendas_top_valoradas_por_calle(viviendas: list[Vivienda], fecha: date|N
     return {c: sorted(e, key= lambda x: x[2], reverse= True)[:n] for c, e in calles.items()}
     
 
+#Ejercicio 6
 
+
+def media_metro_cuadrado(vivienda: Vivienda) -> float:
+        return vivienda.precio/vivienda.metros
+    
+def agrupa_calles_con_valor(lista_viviendas_anyo: list[Vivienda]) -> list[tuple[str, float]]:
+    aux = defaultdict(list)
+    for e in lista_viviendas_anyo:
+        media = media_metro_cuadrado(e)
+        aux[e.calle].append(media)
+        
+    res = []
+    for calle, precio in aux.items():
+        media = sum(precio) / len(precio)
+        res.append((calle, media))    
+    
+    return sorted(res, key= lambda x: x[1], reverse=True)
+             
+    
+def valor_metro_cuadrado_por_calle_y_año(viviendas: list[Vivienda]) -> list[tuple[int,list[tuple[str,float]]]]:
+    anyos_calles = defaultdict(list)
+    for e in viviendas:
+        anyos_calles[e.fecha_adquisicion.year].append(e)
+    
+    res = []
+    for anyo, lista_viviendas in anyos_calles.items():
+        datos_calles = agrupa_calles_con_valor(lista_viviendas)
+        res.append((anyo, datos_calles))
+    
+    return sorted(res)
+        
+    
+    
+
+
+
+
+    
 
 
 

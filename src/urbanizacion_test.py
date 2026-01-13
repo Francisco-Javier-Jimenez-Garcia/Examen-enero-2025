@@ -36,6 +36,10 @@ def test_n_viviendas_top_valoradas_por_calle(viviendas: list[Vivienda], fecha: d
     for calle, lista_viviendas in res.items():
         print(f"{calle} --> {lista_viviendas}")
 
+def test_valor_metro_cuadrado_por_calle_y_año(viviendas: list[Vivienda]) -> None:
+    res = valor_metro_cuadrado_por_calle_y_año(viviendas)
+    separar_resultados(res)
+
 
 
 
@@ -56,6 +60,6 @@ if __name__ == "__main__":
     #test_n_viviendas_top_valoradas_por_calle(viviendas, date(2020,1 ,1), 4)
     #test_n_viviendas_top_valoradas_por_calle(viviendas)  #CON PARAMETROS POR DEFECTO
     
-    
+    test_valor_metro_cuadrado_por_calle_y_año(viviendas)
     
     
